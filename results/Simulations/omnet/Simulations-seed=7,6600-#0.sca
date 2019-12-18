@@ -1,21 +1,21 @@
 version 2
-run Simulations-12-20191215-22:53:55-18910
+run Simulations-13-20191218-11:09:14-65753
 attr configname Simulations
-attr datetime 20191215-22:53:55
+attr datetime 20191218-11:09:14
 attr experiment Simulations
 attr inifile omnetpp.ini
 attr iterationvars "$seed=7, $0=6600"
 attr iterationvarsf seed=7,6600-
 attr measurement "$seed=7, $0=6600"
 attr network WifiCelNetPassiveQueue
-attr processid 18910
+attr processid 65753
 attr repetition 0
 attr replication #0
 attr resultdir results/Simulations/omnet
-attr runnumber 12
+attr runnumber 13
 attr seedset 7
 itervar seed 7
-param **.numJobs 14000
+param **.numJobs 10000
 param *.OFFLOAD.deadline exponential(6600s)
 param *.source.interArrivalTime exponential(120s)
 param *.WIFI.serviceTime exponential(40s)
@@ -37,17 +37,17 @@ attr title "the total number of delays visited by arrived jobs, mean"
 scalar WifiCelNetPassiveQueue.sink delaysVisited:max 0
 attr interpolationmode none
 attr title "the total number of delays visited by arrived jobs, max"
-scalar WifiCelNetPassiveQueue.sink queuesVisited:mean 1.3086913086913
+scalar WifiCelNetPassiveQueue.sink queuesVisited:mean 1.1854
 attr interpolationmode none
 attr title "the total number of queues visited by arrived jobs, mean"
 scalar WifiCelNetPassiveQueue.sink queuesVisited:max 3
 attr interpolationmode none
 attr title "the total number of queues visited by arrived jobs, max"
-scalar WifiCelNetPassiveQueue.sink totalServiceTime:mean 82.123611315114
+scalar WifiCelNetPassiveQueue.sink totalServiceTime:mean 83.836697732026
 attr interpolationmode none
 attr title "the total time spent  by arrived jobs, mean"
 attr unit s
-scalar WifiCelNetPassiveQueue.sink totalServiceTime:max 3534.2984164439
+scalar WifiCelNetPassiveQueue.sink totalServiceTime:max 2849.391421169
 attr interpolationmode none
 attr title "the total time spent  by arrived jobs, max"
 attr unit s
@@ -59,41 +59,41 @@ scalar WifiCelNetPassiveQueue.sink totalDelayTime:max 0
 attr interpolationmode none
 attr title "the total time spent in delay nodes by arrived jobs, max"
 attr unit s
-scalar WifiCelNetPassiveQueue.sink totalQueueingTime:mean 0.023755440733306
+scalar WifiCelNetPassiveQueue.sink totalQueueingTime:mean 60.107462116232
 attr interpolationmode none
 attr title "the total time spent in queues by arrived jobs, mean"
 attr unit s
-scalar WifiCelNetPassiveQueue.sink totalQueueingTime:max 24.265050961692
+scalar WifiCelNetPassiveQueue.sink totalQueueingTime:max 5669.6745385695
 attr interpolationmode none
 attr title "the total time spent in queues by arrived jobs, max"
 attr unit s
-scalar WifiCelNetPassiveQueue.sink lifeTime:mean 761.81140746028
+scalar WifiCelNetPassiveQueue.sink lifeTime:mean 598.12050636223
 attr interpolationmode none
 attr title "lifetime of arrived jobs, mean"
 attr unit s
-scalar WifiCelNetPassiveQueue.sink lifeTime:max 6641.5443130499
+scalar WifiCelNetPassiveQueue.sink lifeTime:max 6317.6102744277
 attr interpolationmode none
 attr title "lifetime of arrived jobs, max"
 attr unit s
 statistic WifiCelNetPassiveQueue.OFFLOAD storeCelTime:stats
-field count 1643
-field mean 1505.89112013
-field stddev 1520.408739448
-field min 0.091175169119
-field max 10991.3602021
-field sum 2474179.1103735
-field sqrsum 7521561722.7758
+field count 244
+field mean 1814.6704309702
+field stddev 1867.0657830755
+field min 0.127399566149
+field max 9727.646418954
+field sum 442779.58515674
+field sqrsum 1650581137.7357
 attr interpolationmode none
 attr title "Time in Cell, stats"
 attr unit s
 statistic WifiCelNetPassiveQueue.OFFLOAD storeWifiTime:stats
-field count 1643
-field mean 3058.8666565982
-field stddev 2995.1534588061
-field min 2.323351687411
-field max 21020.348957451
-field sum 5025717.9167908
-field sqrsum 30103291406.172
+field count 245
+field mean 3115.8086040441
+field stddev 3030.6047276472
+field min 4.582757626116
+field max 20288.586879288
+field sum 763373.1079908
+field sqrsum 4619558361.6915
 attr interpolationmode none
 attr title "Time in Wifi, stats"
 attr unit s
@@ -109,168 +109,168 @@ attr interpolationmode none
 attr title "Response Time, stats"
 attr unit s
 statistic WifiCelNetPassiveQueue.OFFLOAD storeDeadline:stats
-field count 4517
-field mean 6490.1486211607
-field stddev 6430.5998407164
-field min 1.166049898398
-field max 51409.258581412
-field sum 29316001.321783
-field sqrsum 377013611786.9
+field count 3480
+field mean 6611.5694448496
+field stddev 6733.9326639388
+field min 0.423269647234
+field max 64895.786734333
+field sum 23008261.668077
+field sqrsum 309878928920.8
 attr interpolationmode none
 attr title "deadline, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.OFFLOAD queueingTime:mean 1003.7440269958
+scalar WifiCelNetPassiveQueue.OFFLOAD queueingTime:mean 815.6081645805
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
 attr unit s
-scalar WifiCelNetPassiveQueue.OFFLOAD queueingTime:max 6380.3461010881
+scalar WifiCelNetPassiveQueue.OFFLOAD queueingTime:max 6240.5225683058
 attr interpolationmode none
 attr title "queueing time at dequeue, max"
 attr unit s
-scalar WifiCelNetPassiveQueue.OFFLOAD queueLength:timeavg 1.2669459307146
+scalar WifiCelNetPassiveQueue.OFFLOAD queueLength:timeavg 4.2819092691147
 attr interpolationmode sample-hold
 attr title "queue length, timeavg"
-scalar WifiCelNetPassiveQueue.OFFLOAD queueLength:max 51
+scalar WifiCelNetPassiveQueue.OFFLOAD queueLength:max 40
 attr interpolationmode sample-hold
 attr title "queue length, max"
 scalar WifiCelNetPassiveQueue.OFFLOAD dropped:count 0
 attr interpolationmode none
 attr title "drop event, count"
 statistic WifiCelNetPassiveQueue.LOCAL serviceTime:stats
-field count 751
-field mean 4.8996240005735
-field stddev 4.7975633795788
-field min 0.016619535049
-field max 39.517291918773
-field sum 3679.6176244307
-field sqrsum 35291.2036114
+field count 573
+field mean 4.940758644861
+field stddev 4.6169017691366
+field min 0.027355746806
+field max 33.744315772894
+field sum 2831.0547035053
+field sqrsum 26180.185273448
 attr interpolationmode none
 attr title "wifi Service, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.LOCAL busy:timeavg 0.00049095314699569
+scalar WifiCelNetPassiveQueue.LOCAL busy:timeavg 0.002355304601456
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
 statistic WifiCelNetPassiveQueue.LOCAL responseTime:stats
-field count 751
-field mean 5.0636608771698
-field stddev 5.1592781443018
-field min 0.016619535049
-field max 54.417282965816
-field sum 3802.8093187545
-field sqrsum 39219.749998417
+field count 573
+field mean 1053.7609050115
+field stddev 923.33371480936
+field min 2.816137835855
+field max 5670.0057887942
+field sum 603804.99857159
+field sqrsum 1123921926.9182
 attr interpolationmode none
 attr title "Response Time, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.LOCAL queueingTime:mean 0.16403687659635
+scalar WifiCelNetPassiveQueue.LOCAL queueingTime:mean 0.031644745917061
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
 attr unit s
-scalar WifiCelNetPassiveQueue.LOCAL queueingTime:max 24.265050961692
+scalar WifiCelNetPassiveQueue.LOCAL queueingTime:max 8.748928749002
 attr interpolationmode none
 attr title "queueing time at dequeue, max"
 attr unit s
-scalar WifiCelNetPassiveQueue.LOCAL queueLength:timeavg 1.7128285651409e-05
+scalar WifiCelNetPassiveQueue.LOCAL queueLength:timeavg 4.6991949274299e-05
 attr interpolationmode sample-hold
 attr title "queue length, timeavg"
-scalar WifiCelNetPassiveQueue.LOCAL queueLength:max 2
+scalar WifiCelNetPassiveQueue.LOCAL queueLength:max 1
 attr interpolationmode sample-hold
 attr title "queue length, max"
 scalar WifiCelNetPassiveQueue.LOCAL dropped:count 0
 attr interpolationmode none
 attr title "drop event, count"
 statistic WifiCelNetPassiveQueue.REMOTE serviceTime:stats
-field count 13263
-field mean 1.0045689593185
-field stddev 1.0168012504846
-field min 9.4879961e-05
-field max 11.103301494936
-field sum 13323.598107441
-field sqrsum 27095.853077145
+field count 9427
+field mean 1.0154712654672
+field stddev 1.0057220231982
+field min 5.2917053e-05
+field max 9.615345115973
+field sum 9572.8476195589
+field sqrsum 19255.131889536
 attr interpolationmode none
 attr title "wifi Service, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.REMOTE busy:timeavg 0.0017765144755587
+scalar WifiCelNetPassiveQueue.REMOTE busy:timeavg 0.0079658868081103
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
 statistic WifiCelNetPassiveQueue.REMOTE responseTime:stats
-field count 13263
-field mean 1.0203811475197
-field stddev 1.0332923749058
-field min 9.4879961e-05
-field max 11.103301494936
-field sum 13533.315159554
-field sqrsum 27968.885969347
+field count 9427
+field mean 1.0261509402561
+field stddev 1.0140488414756
+field min 5.2917053e-05
+field max 9.615345115973
+field sum 9673.5249137947
+field sqrsum 19619.205854499
 attr interpolationmode none
 attr title "Response Time, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.REMOTE queueingTime:mean 0.015812188201213
+scalar WifiCelNetPassiveQueue.REMOTE queueingTime:mean 0.010679674788988
 attr interpolationmode none
 attr title "queueing time at dequeue, mean"
 attr unit s
-scalar WifiCelNetPassiveQueue.REMOTE queueingTime:max 7.7634813994
+scalar WifiCelNetPassiveQueue.REMOTE queueingTime:max 4.064229387238
 attr interpolationmode none
 attr title "queueing time at dequeue, max"
 attr unit s
-scalar WifiCelNetPassiveQueue.REMOTE queueLength:timeavg 2.7967737870349e-05
+scalar WifiCelNetPassiveQueue.REMOTE queueLength:timeavg 8.4093297759643e-05
 attr interpolationmode sample-hold
 attr title "queue length, timeavg"
-scalar WifiCelNetPassiveQueue.REMOTE queueLength:max 3
+scalar WifiCelNetPassiveQueue.REMOTE queueLength:max 2
 attr interpolationmode sample-hold
 attr title "queue length, max"
 scalar WifiCelNetPassiveQueue.REMOTE dropped:count 0
 attr interpolationmode none
 attr title "drop event, count"
 statistic WifiCelNetPassiveQueue.WIFI serviceTime:stats
-field count 11634
-field mean 40.503524656485
-field stddev 40.027490891663
-field min 0.000114478335
-field max 337.44611764889
-field sum 471218.00585355
-field sqrsum 37724383.033716
+field count 8142
+field mean 40.288271597681
+field stddev 40.990896526524
+field min 0.002393049058
+field max 480.12629795558
+field sum 328027.10734832
+field sqrsum 26894589.733962
 attr interpolationmode none
 attr title "wifi Service, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.WIFI busy:timeavg 0.062835182599078
+scalar WifiCelNetPassiveQueue.WIFI busy:timeavg 0.27310816677545
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
 statistic WifiCelNetPassiveQueue.WIFI responseTime:stats
-field count 11634
-field mean 638.58510983275
-field stddev 973.08753089047
-field min 0.035311981261
-field max 6434.7564197139
-field sum 7429299.1677942
-field sqrsum 15759519879.542
+field count 8142
+field mean 427.45429995712
+field stddev 771.49113025463
+field min 0.008321301372
+field max 6078.1932858727
+field sum 3480332.9102509
+field sqrsum 6333194777.7943
 attr interpolationmode none
 attr title "Response Time, stats"
 attr unit s
 statistic WifiCelNetPassiveQueue.CELL serviceTime:stats
-field count 1629
-field mean 406.78886886715
-field stddev 413.24482243028
-field min 0.612133151635
-field max 3534.0165049022
-field sum 662659.06738458
-field sqrsum 547577981.62206
+field count 1285
+field mean 387.49880750885
+field stddev 382.61969053345
+field min 0.053317020875
+field max 2848.8718254966
+field sum 497935.96764887
+field sqrsum 380924404.29745
 attr interpolationmode none
 attr title "wifi Service, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.CELL busy:timeavg 0.088327385937098
+scalar WifiCelNetPassiveQueue.CELL busy:timeavg 0.41440857431689
 attr interpolationmode sample-hold
 attr title "server busy state, timeavg"
 statistic WifiCelNetPassiveQueue.CELL responseTime:stats
-field count 1629
-field mean 1492.5260679626
-field stddev 1269.3037347027
-field min 2.035253518876
-field max 6641.4893934003
-field sum 2431324.964711
-field sqrsum 6251738738.1938
+field count 1285
+field mean 1468.7888170319
+field stddev 1158.4045216783
+field min 0.134357555032
+field max 6315.1192087586
+field sum 1887393.629886
+field sqrsum 4495183586.9384
 attr interpolationmode none
 attr title "Response Time, stats"
 attr unit s
-scalar WifiCelNetPassiveQueue.source created:last 14000
+scalar WifiCelNetPassiveQueue.source created:last 10000
 attr interpolationmode none
 attr title "the number of jobs created, last"
 

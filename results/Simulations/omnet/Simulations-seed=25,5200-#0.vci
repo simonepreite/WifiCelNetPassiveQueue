@@ -1,0 +1,101 @@
+file 2755426 1576663759                                         
+version 2
+run Simulations-35-20191218-11:09:18-65753
+attr configname Simulations
+attr datetime 20191218-11:09:18
+attr experiment Simulations
+attr inifile omnetpp.ini
+attr iterationvars "$seed=25, $0=5200"
+attr iterationvarsf seed=25,5200-
+attr measurement "$seed=25, $0=5200"
+attr network WifiCelNetPassiveQueue
+attr processid 65753
+attr repetition 0
+attr replication #0
+attr resultdir results/Simulations/omnet
+attr runnumber 35
+attr seedset 25
+itervar seed 25
+param **.numJobs 10000
+param *.OFFLOAD.deadline exponential(5200s)
+param *.source.interArrivalTime exponential(120s)
+param *.WIFI.serviceTime exponential(40s)
+param *.CELL.serviceTime exponential(400s)
+param *.OFFLOAD.switchToWi exponential(1524s)
+param *.OFFLOAD.switchToCel exponential(3120s)
+param *.LOCAL.serviceTime exponential(5s)
+param *.REMOTE.serviceTime exponential(1s)
+
+vector 0 WifiCelNetPassiveQueue.WIFI serviceTime:vector ETV
+attr interpolationmode none
+attr title "wifi Service, vector"
+attr unit s
+vector 1 WifiCelNetPassiveQueue.WIFI responseTime:vector ETV
+attr interpolationmode none
+attr title "Response Time, vector"
+attr unit s
+vector 2 WifiCelNetPassiveQueue.REMOTE serviceTime:vector ETV
+attr interpolationmode none
+attr title "wifi Service, vector"
+attr unit s
+vector 3 WifiCelNetPassiveQueue.REMOTE responseTime:vector ETV
+attr interpolationmode none
+attr title "Response Time, vector"
+attr unit s
+vector 4 WifiCelNetPassiveQueue.sink lifeTime:vector ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+vector 5 WifiCelNetPassiveQueue.OFFLOAD queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 6 WifiCelNetPassiveQueue.REMOTE queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+vector 7 WifiCelNetPassiveQueue.OFFLOAD storeCelTime:vector ETV
+attr interpolationmode none
+attr title "Time in Cell, vector"
+attr unit s
+vector 8 WifiCelNetPassiveQueue.OFFLOAD storeWifiTime:vector ETV
+attr interpolationmode none
+attr title "Time in Wifi, vector"
+attr unit s
+vector 9 WifiCelNetPassiveQueue.OFFLOAD storeDeadline:vector ETV
+attr interpolationmode none
+attr title "deadline, vector"
+attr unit s
+vector 10 WifiCelNetPassiveQueue.CELL serviceTime:vector ETV
+attr interpolationmode none
+attr title "wifi Service, vector"
+attr unit s
+vector 11 WifiCelNetPassiveQueue.CELL responseTime:vector ETV
+attr interpolationmode none
+attr title "Response Time, vector"
+attr unit s
+vector 12 WifiCelNetPassiveQueue.LOCAL serviceTime:vector ETV
+attr interpolationmode none
+attr title "wifi Service, vector"
+attr unit s
+vector 13 WifiCelNetPassiveQueue.LOCAL responseTime:vector ETV
+attr interpolationmode none
+attr title "Response Time, vector"
+attr unit s
+vector 14 WifiCelNetPassiveQueue.LOCAL queueLength:vector ETV
+attr interpolationmode sample-hold
+attr title "queue length, vector"
+0	2882 385238 175613 245675 3000049.031057432718 4210359.110659479294 8457 0.013739786572 474.17896004606 338788.05077297 27323475.963197
+1	388120 386223 175613 245675 3000049.031057432718 4210359.110659479294 8457 0.013739786572 5429.9382179295 2614041.6915073 3630215252.6167
+2	774343 425118 175615 245677 3000050.151630516528 4210361.041025107705 9497 5.6821372e-05 7.88358574652 9472.8805453476 18942.704416062
+3	1199461 425111 175615 245677 3000050.151630516528 4210361.041025107705 9497 5.6821372e-05 7.88358574652 9570.2887702747 19328.507307307
+4	1624572 456885 175616 245678 3000050.151630516528 4210361.041025107705 10000 0.179396803201 5722.8415176182 4283955.2850009 6734790648.3753
+5	2081457 366413 175628 245670 3000348.480425529076 4210347.707927784129 11406 0 43 65539 866339
+6	2447870 6371 175700 245110 3002621.613203950761 4200951.332702763331 200 0 1 100 100
+7	2454241 11359 175855 245551 3004203.624697164623 4208460.453743823759 248 11.065279990615 9193.4695827212 376074.8711604 1148449025.9974
+8	2465600 11336 175856 245557 3004269.254360432705 4208994.314631158729 248 16.849531327101 18100.059934857 833760.98587671 5585096584.4636
+9	2476936 133984 175869 245556 3004582.412828578236 4208780.110015083768 2927 1.026276717323 46764.149255273 14686436.983767 150062960444.85
+10	2610920 48607 175874 245584 3004902.362715082085 4209187.267693203693 1040 0.066082795038 4660.2676041089 420024.92141556 370058696.28424
+11	2659527 48629 175874 245584 3004902.362715082085 4209187.267693203693 1040 0.066082795038 5722.2916528373 1242166.5270847 2499278863.6443
+12	2708156 23078 175883 245340 3005028.42132539327 4204919.59130269152 503 0.000128335569 39.341916375285 2355.6829778244 24076.404572909
+13	2731234 23533 175883 245340 3005028.42132539327 4204919.59130269152 503 7.448496729551 4176.4975555904 418176.7776386 597489522.54277
+14	2754767 658 177682 237281 3035343.179540408951 4068933.334243677899 20 0 1 10 10
+

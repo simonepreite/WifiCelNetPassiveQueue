@@ -25,15 +25,18 @@ def listJsonVec(jsonRoot, transiente):
 		with open(jsonRoot + file) as jsonFile:
 			tmpJson = json.load(jsonFile)
 			firstKey = list(tmpJson.keys())[0]
-			seed = 7
-			if transiente:
-				seed = tmpJson[firstKey]["attributes"]["iterationvars"].split(",")[0].split("=")[1]
+			#seed = 7
+			#if transiente:
+			seed = tmpJson[firstKey]["attributes"]["iterationvars"].split(",")[0].split("=")[1]
 			deadline = int(tmpJson[firstKey]["attributes"]["iterationvars"].split(",")[1].split("=")[1])
 			#else:
 			#	deadline = int(tmpJson[firstKey]["attributes"]["iterationvars"].split("=")[1])
 			filesDict.setdefault(deadline, {}).setdefault(seed, {}).setdefault("serviceTime", {})
 			filesDict.setdefault(deadline, {}).setdefault(seed, {}).setdefault("responseTime", {})
+			filesDict.setdefault(deadline, {}).setdefault(seed, {}).setdefault("lifeTime", {})
 			for vec in tmpJson[firstKey]["vectors"]:
+				if "lifeTime" in vec["name"]:
+					filesDict[deadline][seed]["lifeTime"].setdefault(vec["name"],(vec["time"], vec["value"]))
 				if "response" in vec["name"]:
 					filesDict[deadline][seed]["responseTime"].setdefault(vec["module"],(vec["time"], vec["value"]))
 				elif "ervic" in vec["name"] and "REMOTE" not in vec["module"]:
@@ -104,36 +107,75 @@ def getMetric(jsonRawData, type, metric):
 def plotMeanEnergyConsuption(jsonRawData):
 	deadlines = []
 	meanEnergyConsuptions = []
-	seed = 7
-	TotalLocalActiveTime = 7500000
+	#seed = 7
 	for deadline, value in jsonRawData.items():
-		TotalWifiActiveTime = np.sum(value[seed]["serviceTime"]["storeWifiTime:vector"][1])
-		TotalCelActiveTime = np.sum(value[seed]["serviceTime"]["storeCelTime:vector"][1])
-		TotalConsuptionWifi = np.sum(value[seed]["serviceTime"]["WifiCelNetPassiveQueue.WIFI"][1]) * 0.7 / TotalWifiActiveTime
-		TotalConsuptionCel = np.sum(value[seed]["serviceTime"]["WifiCelNetPassiveQueue.CELL"][1]) * 2.5 / TotalCelActiveTime
-		TotalConsuptionLocal = np.sum(value[seed]["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][1]) * 2 / TotalLocalActiveTime
-		meanEnergyConsuption = 1 / 0.5 * np.sum([TotalConsuptionWifi, TotalConsuptionCel, TotalConsuptionLocal])
-		meanEnergyConsuptions.append(meanEnergyConsuption)
-		deadlines.append(deadline/60)
+		print("deadline: {}".format(deadline))
+		meanEnergyConsuptionacc = []
+		for seed, val in value.items():
+			#TotalLocalActiveTime = val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][0][-1] - val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][0][0]
+			TotalLocalActiveTime = np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][1])
+			TotalWifiActiveTime = np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.WIFI"][1])
+			TotalCelActiveTime = np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.CELL"][1])#val["serviceTime"]["WifiCelNetPassiveQueue.CELL"][0][-1] - val["serviceTime"]["WifiCelNetPassiveQueue.CELL"][0][0]#np.sum(val["serviceTime"]["storeCelTime:vector"][1])
+			#TotalConsuptionWifi = np.mean(np.multiply(val["serviceTime"]["WifiCelNetPassiveQueue.WIFI"][1],0.0175) / 40)
+			#TotalConsuptionCel = np.mean(np.multiply(val["serviceTime"]["WifiCelNetPassiveQueue.CELL"][1],0.00625) / 400)
+			#TotalConsuptionLocal = np.mean(np.multiply(val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][1],0.4) / 5)
+			#TotalConsuptionWifi = np.mean(np.multiply(val["serviceTime"]["WifiCelNetPassiveQueue.WIFI"][1],0.0175) / 40)
+			#TotalConsuptionCel = np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.CELL"][1]) * 0.00625 / TotalCelActiveTime
+			#TotalConsuptionLocal = np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][1]) * 0.4 / TotalLocalActiveTime
+			#print("seed: {}, Total wifi Time: {}, Total Cel Time: {}, wifi Sum * 0.7:  {}, cel Sum * 2.5: {}, local Sum * 2: {}, num Job in local: {}".format(seed, TotalWifiActiveTime, TotalCelActiveTime, np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.WIFI"][1]) * 0.7, np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.CELL"][1]) * 2.5, np.sum(val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][1]) * 2, 	len(val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][1])))
+			sumJob = (len(val["serviceTime"]["WifiCelNetPassiveQueue.WIFI"][1])+len(val["serviceTime"]["WifiCelNetPassiveQueue.CELL"][1])+len(val["serviceTime"]["WifiCelNetPassiveQueue.LOCAL"][1]))
+			#meanEnergyConsuptionacc.append(1 / (1/120) * np.sum([TotalConsuptionWifi, TotalConsuptionCel, TotalConsuptionLocal]) / sumJob)
+			meanEnergyConsuptionacc.append(((TotalWifiActiveTime)*28+(TotalCelActiveTime)*1000+(TotalLocalActiveTime)*10)/sumJob)
+		meanEnergyConsuptions.append(np.mean(meanEnergyConsuptionacc))
+		deadlines.append(deadline)
 	matrixMeanEnergyConsuptions = np.column_stack((deadlines, meanEnergyConsuptions))
 	matrixMeanEnergyConsuptions = matrixMeanEnergyConsuptions[matrixMeanEnergyConsuptions[:,0].argsort()]
 	plt.plot(matrixMeanEnergyConsuptions[:,0].tolist(), matrixMeanEnergyConsuptions[:,1].tolist())
-	xs = matrixMeanEnergyConsuptions[:,0]
+	"""xs = matrixMeanEnergyConsuptions[:,0]
 	ys = matrixMeanEnergyConsuptions[:,1]
 	coeff = np.polyfit(xs.flatten(), ys.flatten(), 5)
 	p = np.poly1d(coeff)
-	plt.plot(xs.tolist(), p(xs).tolist())
+	plt.plot(xs.tolist(), p(xs).tolist())"""
 	return matrixMeanEnergyConsuptions
 	
+def plotMeanResponseTime1(jsonRawData):
+	deadlines = []
+	meanResponseTimes = []
+	#seed = 7
+	# non avendo distinzione tra coda wifi e coda cellulate suppongo che la coda offload sia una buona indicazione media di entrambe, quindi la considero come un'unica metrica 
+	TotalLocalActiveTime = 3500000
+	for deadline, value in jsonRawData.items():
+		meanResponseTimeacc = []
+		for seed, val in value.items():
+			TotallifeTimeActiveTime = np.mean(val["lifeTime"]["lifeTime:vector"][1])
+			meanResponseTimeacc.append(TotallifeTimeActiveTime)
+		tempMean = np.mean(meanResponseTimeacc)/60
+		print(tempMean)
+		meanResponseTimes.append(tempMean)
+		deadlines.append(deadline/60)
+	matrixMeanResponseTimes = np.column_stack((deadlines, meanResponseTimes))
+	matrixMeanResponseTimes = matrixMeanResponseTimes[matrixMeanResponseTimes[:,0].argsort()]
+	xs = matrixMeanResponseTimes[:,0]
+	ys = matrixMeanResponseTimes[:,1]
+	plt.plot(xs.tolist(), ys.tolist())
+	"""coeff = np.polyfit(xs.flatten(), ys.flatten(), 5)
+	p = np.poly1d(coeff)
+	plt.plot(xs.tolist(), p(xs).tolist())"""
+	return matrixMeanResponseTimes
 
 def plotMeanResponseTime(jsonRawData):
 	deadlines = []
 	meanResponseTimes = []
-	seed = 7
+	#seed = 7
 	# non avendo distinzione tra coda wifi e coda cellulate suppongo che la coda offload sia una buona indicazione media di entrambe, quindi la considero come un'unica metrica 
+	TotalLocalActiveTime = 1#3500000
 	for deadline, value in jsonRawData.items():
-		meanResponseTime = 1 / 0.5 * (np.sum([np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.WIFI"][1]), np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.CELL"][1]), np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.REMOTE"][1]), np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.LOCAL"][1])]))/60
-		meanResponseTimes.append(meanResponseTime)
+		meanResponseTimeacc = []
+		for seed, val in value.items():
+			TotalWifiActiveTime = 1#np.sum(val["serviceTime"]["storeWifiTime:vector"][1])
+			TotalCelActiveTime = 1#np.sum(val["serviceTime"]["storeCelTime:vector"][1])
+			meanResponseTimeacc.append((np.sum([np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.WIFI"][1])/TotalWifiActiveTime, np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.CELL"][1])/TotalCelActiveTime, np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.REMOTE"][1])/TotalLocalActiveTime, np.mean(value[seed]["responseTime"]["WifiCelNetPassiveQueue.LOCAL"][1])/TotalLocalActiveTime]))/60)
+		meanResponseTimes.append(np.mean(meanResponseTimeacc))
 		deadlines.append(deadline/60)
 	matrixMeanResponseTimes = np.column_stack((deadlines, meanResponseTimes))
 	matrixMeanResponseTimes = matrixMeanResponseTimes[matrixMeanResponseTimes[:,0].argsort()]
@@ -151,8 +193,8 @@ def plotERWP(matrixMeanResponseTimes, matrixMeanEnergyConsuptions, w=0.5):
 	plt.plot(ERWPValues.tolist(), matrixMeanResponseTimes[:,1].tolist(), label="ERWP")
 	
 def plotMetrics(jsonRawData):
-	matrixMeanEnergyConsuptions = plotMeanEnergyConsuption(jsonRawData)
-	#matrixMeanResponseTimes = plotMeanResponseTime(jsonRawData)
+	#matrixMeanEnergyConsuptions = plotMeanEnergyConsuption(jsonRawData)
+	matrixMeanResponseTimes = plotMeanResponseTime1(jsonRawData)
 	#calcolare ERWP
 	"""ERWP = meanEnergyConsuption^(1-w)*meanResponseTime^(1-w) where w is equal to 0.5 by default"""
 	#plotERWP(matrixMeanResponseTimes, matrixMeanEnergyConsuptions, w=0.9)

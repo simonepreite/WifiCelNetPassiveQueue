@@ -58,11 +58,33 @@ void MyPassiveQueue::handleMessage(cMessage *msg)
        simtime_t newScheduleMode = wifiOn ? par("switchToWi").doubleValue() : par("switchToCel").doubleValue();
        if (wifiOn) {
            emit(storeCelTime, newScheduleMode);
+           cQueue::Iterator scroll = cQueue::Iterator(queue);
+           Job* tempJob = (Job*)scroll.operator ++().operator *();
+           while (tempJob){
+               EV << "sto eliminando le deadline" << endl;
+               if ((cMessage*)tempJob->getContextPointer() != nullptr){
+                   simtime_t oldScheduledTime = ((cMessage*)tempJob->getContextPointer())->getArrivalTime();
+                   simtime_t created = ((cMessage*)tempJob->getContextPointer())->getSendingTime();
+                   cancelAndDelete((cMessage*)tempJob->getContextPointer());
+                   tempJob->setContextPointer(nullptr);
+                   cMessage* deadline = new cMessage("deadline");
+                   tempJob->setContextPointer(deadline);
+                   deadline->setContextPointer(tempJob);
+                   simtime_t totalDeadline = oldScheduledTime - created;
+                   simtime_t residualDeadline = totalDeadline - (simTime() - created);
+                   simtime_t reschedule = simTime() + residualDeadline + newScheduleMode;
+                   scheduleAt(reschedule, deadline);
+               }
+           tempJob = (Job*)scroll.operator ++().operator *();
+           }
        } else
            emit(storeWifiTime, newScheduleMode);
        scheduleAt(simTime() + newScheduleMode, switchMode);
        EV << "SWITCHED! wifiOn: " << wifiOn << " - next switch time: " << simTime() + newScheduleMode << endl;
        wifiOn = !wifiOn;
+       cGate *out = gate("out", wifiOn ? 0:1);
+       if(check_and_cast<IServer *>(out->getPathEndGate()->getOwnerModule())->isIdle() and !queue.isEmpty())
+           request(wifiOn ? 0:1);
     }
     else if (!strcmp(msg->getName(), "deadline")){
         bool contained;
@@ -72,8 +94,8 @@ void MyPassiveQueue::handleMessage(cMessage *msg)
                 Job *j;
                 j = (Job*)queue.remove((Job*)msg->getContextPointer());
                 emit(queueLengthSignal, length());
-                j->setTotalQueueingTime(0);
-                //j->setTotalQueueingTime(j->getTotalQueueingTime() + simTime() - j->getTimestamp());
+                //j->setTotalQueueingTime(0);
+                j->setTotalQueueingTime(j->getTotalQueueingTime() + simTime() - j->getTimestamp());
                 sendJob(j, 2);
             }
             ((Job*)msg->getContextPointer())->setContextPointer(nullptr);
@@ -93,25 +115,24 @@ void MyPassiveQueue::handleMessage(cMessage *msg)
         }
         cGate *out = gate("out", wifiOn ? 0:1);
         if (length() == 0 and check_and_cast<IServer *>(out->getPathEndGate()->getOwnerModule())->isIdle()) {
-                    // send through without queueing
-                    sendJob(job, wifiOn ? 0:1);
-                }else{
-        queue.insert(job);
-        emit(queueLengthSignal, length());
-        job->setQueueCount(job->getQueueCount() + 1);
-        if(!wifiOn){
-                        cMessage* deadline = new cMessage("deadline");
-                        job->setContextPointer(deadline);
-                        deadline->setContextPointer(job);
-                        simtime_t deadlimit = par("deadline").doubleValue();
-                        scheduleAt(simTime() + deadlimit, deadline);
-                        emit(storeDeadline, deadlimit);
-                        EV << "job: " << job << " deadline: " << deadline << endl;
-                    }
-                }
-        //else{
-        //    request(wifiOn ? 0:1);
-        //}
+            // send through without queueing
+            sendJob(job, wifiOn ? 0:1);
+        }else{
+            queue.insert(job);
+            emit(queueLengthSignal, length());
+            job->setQueueCount(job->getQueueCount() + 1);
+            if(!wifiOn){
+                cMessage* deadline = new cMessage("deadline");
+                job->setContextPointer(deadline);
+                deadline->setContextPointer(job);
+                simtime_t deadlimit = par("deadline").doubleValue();
+                scheduleAt(simTime() + deadlimit, deadline);
+                emit(storeDeadline, deadlimit);
+                EV << "job: " << job << " deadline: " << deadline << endl;
+            }
+            if(check_and_cast<IServer *>(out->getPathEndGate()->getOwnerModule())->isIdle())
+                request(wifiOn ? 0:1);
+        }
     }
 }
 
@@ -128,6 +149,7 @@ int MyPassiveQueue::length()
 
 void MyPassiveQueue::request(int gateIndex)
 {
+    if ((wifiOn and gateIndex==0) or (!wifiOn and gateIndex == 1)){
     Enter_Method("request()!");
 
     ASSERT(!queue.isEmpty());
@@ -151,14 +173,14 @@ void MyPassiveQueue::request(int gateIndex)
         cMessage *msg = (cMessage*)job->getContextPointer();
         cancelAndDelete(msg);
     }
-    if ((wifiOn and gateIndex==0) or (!wifiOn and gateIndex == 1)){
+
         sendJob(job, gateIndex);
-    }else{
+    }/*else{
         cGate *out = gate("out", wifiOn ? 0:1);
         if (check_and_cast<IServer *>(out->getPathEndGate()->getOwnerModule())->isIdle()){
             sendJob(job,  wifiOn ? 0:1);
         }
-    }
+    }*/
 }
 
 void MyPassiveQueue::sendJob(Job *job, int gateIndex)
