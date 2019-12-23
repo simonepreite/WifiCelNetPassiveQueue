@@ -25,25 +25,25 @@ network WifiCelNetPassiveQueue
     @display("bgb=634,436");
     submodules:
         sink: Sink {
-            @display("p=513,99");
+            @display("p=367,138");
         }
         OFFLOAD: MyPassiveQueue {
             @display("p=202,225");
         }
         LOCAL: Queue {
-            @display("p=204,103");
+            @display("p=203,140");
         }
         REMOTE: Queue {
-            @display("p=509,236");
+            @display("p=367,224");
         }
         WIFI: MyServer {
-            @display("p=363,182");
+            @display("p=283,185");
         }
         CELL: MyServer {
-            @display("p=364,304");
+            @display("p=282,267");
         }
         source: Source {
-            @display("p=51,224");
+            @display("p=128,226");
         }
     connections:
         source.out --> OFFLOAD.in++;

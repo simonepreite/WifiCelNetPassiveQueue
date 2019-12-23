@@ -32,8 +32,8 @@ void MyPassiveQueue::initialize()
     queueLengthSignal = registerSignal("queueLength");
 
     storeDeadline = registerSignal("storeDeadline");
-    storeWifiTime = registerSignal("storeWifiTime");
-    storeCelTime = registerSignal("storeCelTime");
+    //storeWifiTime = registerSignal("storeWifiTime");
+    //storeCelTime = registerSignal("storeCelTime");
 
     switchMode = new cMessage("switch");
 
@@ -56,31 +56,27 @@ void MyPassiveQueue::handleMessage(cMessage *msg)
 {
     if (msg == switchMode){
        simtime_t newScheduleMode = wifiOn ? par("switchToWi").doubleValue() : par("switchToCel").doubleValue();
-       if (wifiOn) {
-           emit(storeCelTime, newScheduleMode);
+       if (wifiOn) {//da decidere se utilizzare o no
            cQueue::Iterator scroll = cQueue::Iterator(queue);
            Job* tempJob = (Job*)scroll.operator ++().operator *();
            while (tempJob){
-               EV << "sto eliminando le deadline" << endl;
                if ((cMessage*)tempJob->getContextPointer() != nullptr){
-                   simtime_t oldScheduledTime = ((cMessage*)tempJob->getContextPointer())->getArrivalTime();
-                   simtime_t created = ((cMessage*)tempJob->getContextPointer())->getSendingTime();
+                   /*simtime_t oldScheduledTime = ((cMessage*)tempJob->getContextPointer())->getArrivalTime();
+                   simtime_t created = ((cMessage*)tempJob->getContextPointer())->getSendingTime();*/
                    cancelAndDelete((cMessage*)tempJob->getContextPointer());
                    tempJob->setContextPointer(nullptr);
-                   cMessage* deadline = new cMessage("deadline");
+                   /*cMessage* deadline = new cMessage("deadline");
                    tempJob->setContextPointer(deadline);
                    deadline->setContextPointer(tempJob);
                    simtime_t totalDeadline = oldScheduledTime - created;
                    simtime_t residualDeadline = totalDeadline - (simTime() - created);
                    simtime_t reschedule = simTime() + residualDeadline + newScheduleMode;
-                   scheduleAt(reschedule, deadline);
+                   scheduleAt(reschedule, deadline);*/
                }
            tempJob = (Job*)scroll.operator ++().operator *();
            }
-       } else
-           emit(storeWifiTime, newScheduleMode);
+       }
        scheduleAt(simTime() + newScheduleMode, switchMode);
-       EV << "SWITCHED! wifiOn: " << wifiOn << " - next switch time: " << simTime() + newScheduleMode << endl;
        wifiOn = !wifiOn;
        cGate *out = gate("out", wifiOn ? 0:1);
        if(check_and_cast<IServer *>(out->getPathEndGate()->getOwnerModule())->isIdle() and !queue.isEmpty())
@@ -94,7 +90,6 @@ void MyPassiveQueue::handleMessage(cMessage *msg)
                 Job *j;
                 j = (Job*)queue.remove((Job*)msg->getContextPointer());
                 emit(queueLengthSignal, length());
-                //j->setTotalQueueingTime(0);
                 j->setTotalQueueingTime(j->getTotalQueueingTime() + simTime() - j->getTimestamp());
                 sendJob(j, 2);
             }
@@ -128,7 +123,7 @@ void MyPassiveQueue::handleMessage(cMessage *msg)
                 simtime_t deadlimit = par("deadline").doubleValue();
                 scheduleAt(simTime() + deadlimit, deadline);
                 emit(storeDeadline, deadlimit);
-                EV << "job: " << job << " deadline: " << deadline << endl;
+                EV << "job: " << job << " deadline: " << deadlimit << endl;
             }
             if(check_and_cast<IServer *>(out->getPathEndGate()->getOwnerModule())->isIdle())
                 request(wifiOn ? 0:1);
@@ -139,7 +134,8 @@ void MyPassiveQueue::handleMessage(cMessage *msg)
 void MyPassiveQueue::refreshDisplay() const
 {
     // change the icon color
-    getDisplayString().setTagArg("i", 1, queue.isEmpty() ? "" : "cyan");
+    //getDisplayString().setTagArg("i", 1, queue.isEmpty() ? "" : "cyan");
+    getDisplayString().setTagArg("i", 1, wifiOn ? "green" : "blue");
 }
 
 int MyPassiveQueue::length()

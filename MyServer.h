@@ -41,7 +41,7 @@ class QUEUEING_API MyServer : public cSimpleModule, public IServer
 
     protected:
         virtual void initialize() override;
-        virtual int numInitStages() const override {return 2;}
+        virtual int numInitStages() const override {return 1;}
         virtual void handleMessage(cMessage *msg) override;
         virtual void refreshDisplay() const override;
         virtual void finish() override;

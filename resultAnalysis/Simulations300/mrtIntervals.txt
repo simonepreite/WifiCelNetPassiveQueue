@@ -1,0 +1,42 @@
+Confidence intervals for deadline: 3600 - MRT: 2.918
+batch: 7, obs: 12, mean: 2.927, variance: 0.008, min: 2.863, max: 2.991, OK
+Confidence intervals for deadline: 9000 - MRT: 2.593
+batch: 7, obs: 12, mean: 2.592, variance: 0.001, min: 2.569, max: 2.615, OK
+Confidence intervals for deadline: 10500 - MRT: 2.565
+batch: 7, obs: 12, mean: 2.566, variance: 0.003, min: 2.526, max: 2.607, OK
+Confidence intervals for deadline: 2700 - MRT: 3.083
+batch: 7, obs: 12, mean: 3.089, variance: 0.004, min: 3.043, max: 3.135, OK
+Confidence intervals for deadline: 1500 - MRT: 3.335
+batch: 7, obs: 12, mean: 3.338, variance: 0.002, min: 3.307, max: 3.368, OK
+Confidence intervals for deadline: 3900 - MRT: 2.898
+batch: 7, obs: 12, mean: 2.902, variance: 0.004, min: 2.857, max: 2.946, OK
+Confidence intervals for deadline: 3000 - MRT: 2.998
+batch: 7, obs: 12, mean: 3.006, variance: 0.002, min: 2.975, max: 3.037, OK
+Confidence intervals for deadline: 3300 - MRT: 2.955
+batch: 7, obs: 12, mean: 2.952, variance: 0.001, min: 2.934, max: 2.970, OK
+Confidence intervals for deadline: 4200 - MRT: 2.864
+batch: 7, obs: 12, mean: 2.856, variance: 0.002, min: 2.825, max: 2.887, OK
+Confidence intervals for deadline: 7500 - MRT: 2.674
+batch: 7, obs: 12, mean: 2.678, variance: 0.001, min: 2.655, max: 2.701, OK
+Confidence intervals for deadline: 4500 - MRT: 2.816
+batch: 7, obs: 12, mean: 2.809, variance: 0.005, min: 2.757, max: 2.861, OK
+Confidence intervals for deadline: 5700 - MRT: 2.754
+batch: 7, obs: 12, mean: 2.747, variance: 0.002, min: 2.710, max: 2.783, OK
+Confidence intervals for deadline: 12000 - MRT: 2.551
+batch: 7, obs: 12, mean: 2.546, variance: 0.001, min: 2.525, max: 2.567, OK
+Confidence intervals for deadline: 5100 - MRT: 2.774
+batch: 7, obs: 12, mean: 2.782, variance: 0.001, min: 2.757, max: 2.808, OK
+Confidence intervals for deadline: 900 - MRT: 3.625
+batch: 7, obs: 12, mean: 3.624, variance: 0.001, min: 3.596, max: 3.652, OK
+Confidence intervals for deadline: 1980 - MRT: 3.173
+batch: 7, obs: 12, mean: 3.171, variance: 0.005, min: 3.120, max: 3.222, OK
+Confidence intervals for deadline: 1200 - MRT: 3.488
+batch: 7, obs: 12, mean: 3.494, variance: 0.002, min: 3.457, max: 3.530, OK
+Confidence intervals for deadline: 6000 - MRT: 2.721
+batch: 7, obs: 12, mean: 2.725, variance: 0.002, min: 2.694, max: 2.755, OK
+Confidence intervals for deadline: 5400 - MRT: 2.769
+batch: 7, obs: 12, mean: 2.768, variance: 0.002, min: 2.738, max: 2.798, OK
+Confidence intervals for deadline: 4800 - MRT: 2.812
+batch: 7, obs: 12, mean: 2.807, variance: 0.002, min: 2.779, max: 2.836, OK
+Confidence intervals for deadline: 2400 - MRT: 3.096
+batch: 7, obs: 12, mean: 3.102, variance: 0.003, min: 3.059, max: 3.146, OK

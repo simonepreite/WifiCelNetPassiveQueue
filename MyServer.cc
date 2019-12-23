@@ -60,7 +60,7 @@ void MyServer::handleMessage(cMessage *msg)
         // examine all input queues, and request a new job from a non empty queue
         int k = selectionStrategy->select();
         if (k >= 0) {
-            EV << "requesting job from queue " << k << endl;
+            //EV << "requesting job from queue " << k << endl;
             cGate *gate = selectionStrategy->selectableGate(k);
             check_and_cast<IPassiveQueue *>(gate->getOwnerModule())->request(gate->getIndex());
         }
@@ -73,6 +73,7 @@ void MyServer::handleMessage(cMessage *msg)
 
         jobServiced = check_and_cast<Job *>(msg);
         simtime_t serviceTime = par("serviceTime");
+        EV << jobServiced << "  " << serviceTime << endl;
         scheduleAt(simTime()+serviceTime, endServiceMsg);
         emit(busySignal, true);
     }
@@ -81,6 +82,7 @@ void MyServer::handleMessage(cMessage *msg)
 void MyServer::refreshDisplay() const
 {
     getDisplayString().setTagArg("i2", 0, jobServiced ? "status/execute" : "");
+    getDisplayString().setTagArg("i", 1, allocated ? "red" : "");
 }
 
 void MyServer::finish()
@@ -94,7 +96,7 @@ bool MyServer::isIdle()
 
 void MyServer::allocate()
 {
-    EV << this << " allocated "<< endl;
+    //EV << this << " allocated "<< endl;
     allocated = true;
 }
 

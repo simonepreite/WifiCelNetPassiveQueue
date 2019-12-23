@@ -30,8 +30,8 @@ class QUEUEING_API MyPassiveQueue : public cSimpleModule, public IPassiveQueue
 		simsignal_t queueingTimeSignal;
 
 		simsignal_t storeDeadline;
-		simsignal_t storeWifiTime;
-		simsignal_t storeCelTime;
+		//simsignal_t storeWifiTime;
+		//simsignal_t storeCelTime;
 
 		cMessage* switchMode;
 

@@ -30,10 +30,10 @@ simple MyPassiveQueue
         @statistic[storeDeadline](title="deadline"; record=vector,stats; unit=s; interpolationmode=none);
 		@signal[responseTime](type="simtime_t");
         @statistic[responseTime](title="Response Time"; record=vector,stats; unit=s; interpolationmode=none);
-		@signal[storeWifiTime](type="simtime_t");
-        @statistic[storeWifiTime](title="Time in Wifi"; record=vector,stats; unit=s; interpolationmode=none);
-		@signal[storeCelTime](type="simtime_t");
-        @statistic[storeCelTime](title="Time in Cell"; record=vector,stats; unit=s; interpolationmode=none);
+		//@signal[storeWifiTime](type="simtime_t");
+       	//@statistic[storeWifiTime](title="Time in Wifi"; record=vector,stats; unit=s; interpolationmode=none);
+		//@signal[storeCelTime](type="simtime_t");
+        //@statistic[storeCelTime](title="Time in Cell"; record=vector,stats; unit=s; interpolationmode=none);
 
         int capacity = default(-1);  // negative capacity means unlimited queue
         bool fifo = default(true);   // whether the module works as a queue (fifo=true) or a stack (fifo=false)

@@ -1,0 +1,42 @@
+Confidence intervals for deadline: 3600 - MEC: 466.521
+batch: 7, obs: 12, mean: 469.483, variance: 882.471, min: 447.665, max: 491.301, OK
+Confidence intervals for deadline: 9000 - MEC: 528.748
+batch: 7, obs: 12, mean: 528.914, variance: 220.761, min: 518.001, max: 539.826, OK
+Confidence intervals for deadline: 10500 - MEC: 536.880
+batch: 7, obs: 12, mean: 535.606, variance: 385.369, min: 521.188, max: 550.024, OK
+Confidence intervals for deadline: 2700 - MEC: 463.161
+batch: 7, obs: 12, mean: 463.762, variance: 318.338, min: 450.658, max: 476.866, OK
+Confidence intervals for deadline: 1500 - MEC: 455.236
+batch: 7, obs: 12, mean: 453.305, variance: 107.683, min: 445.684, max: 460.927, OK
+Confidence intervals for deadline: 3900 - MEC: 473.646
+batch: 7, obs: 12, mean: 474.214, variance: 225.916, min: 463.175, max: 485.253, OK
+Confidence intervals for deadline: 3000 - MEC: 461.461
+batch: 7, obs: 12, mean: 463.544, variance: 211.506, min: 452.863, max: 474.226, OK
+Confidence intervals for deadline: 3300 - MEC: 455.523
+batch: 7, obs: 12, mean: 454.312, variance: 94.442, min: 447.175, max: 461.450, OK
+Confidence intervals for deadline: 4200 - MEC: 480.109
+batch: 7, obs: 12, mean: 478.127, variance: 153.490, min: 469.028, max: 487.227, OK
+Confidence intervals for deadline: 7500 - MEC: 524.708
+batch: 7, obs: 12, mean: 526.827, variance: 167.517, min: 517.321, max: 536.333, OK
+Confidence intervals for deadline: 4500 - MEC: 475.574
+batch: 7, obs: 12, mean: 473.129, variance: 353.971, min: 459.311, max: 486.947, OK
+Confidence intervals for deadline: 5700 - MEC: 502.888
+batch: 7, obs: 12, mean: 500.620, variance: 416.079, min: 485.639, max: 515.602, OK
+Confidence intervals for deadline: 12000 - MEC: 545.717
+batch: 7, obs: 12, mean: 542.207, variance: 69.782, min: 536.071, max: 548.342, OK
+Confidence intervals for deadline: 5100 - MEC: 488.296
+batch: 7, obs: 12, mean: 489.537, variance: 214.605, min: 478.778, max: 500.296, OK
+Confidence intervals for deadline: 900 - MEC: 493.586
+batch: 7, obs: 12, mean: 493.086, variance: 432.653, min: 477.810, max: 508.363, OK
+Confidence intervals for deadline: 1980 - MEC: 443.888
+batch: 7, obs: 12, mean: 444.791, variance: 252.568, min: 433.119, max: 456.464, OK
+Confidence intervals for deadline: 1200 - MEC: 481.773
+batch: 7, obs: 12, mean: 484.492, variance: 238.714, min: 473.145, max: 495.840, OK
+Confidence intervals for deadline: 6000 - MEC: 498.800
+batch: 7, obs: 12, mean: 500.815, variance: 272.086, min: 488.700, max: 512.930, OK
+Confidence intervals for deadline: 5400 - MEC: 494.106
+batch: 7, obs: 12, mean: 493.085, variance: 222.465, min: 482.130, max: 504.040, OK
+Confidence intervals for deadline: 4800 - MEC: 487.970
+batch: 7, obs: 12, mean: 487.595, variance: 182.337, min: 477.678, max: 497.513, OK
+Confidence intervals for deadline: 2400 - MEC: 448.834
+batch: 7, obs: 12, mean: 450.672, variance: 178.553, min: 440.858, max: 460.486, OK

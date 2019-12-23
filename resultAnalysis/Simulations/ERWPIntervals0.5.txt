@@ -1,0 +1,42 @@
+Confidence intervals for deadline: 12000 - ERWP: 34.826
+batch: 7, obs: 12, mean: 34.805, variance: 0.340, min: 34.377, max: 35.233, OK
+Confidence intervals for deadline: 4200 - ERWP: 31.129
+batch: 7, obs: 12, mean: 31.150, variance: 0.229, min: 30.798, max: 31.501, OK
+Confidence intervals for deadline: 10500 - ERWP: 34.283
+batch: 7, obs: 12, mean: 34.321, variance: 0.248, min: 33.955, max: 34.687, OK
+Confidence intervals for deadline: 900 - ERWP: 22.632
+batch: 7, obs: 12, mean: 22.595, variance: 0.037, min: 22.454, max: 22.735, OK
+Confidence intervals for deadline: 4500 - ERWP: 31.519
+batch: 7, obs: 12, mean: 31.555, variance: 0.121, min: 31.299, max: 31.810, OK
+Confidence intervals for deadline: 7500 - ERWP: 33.772
+batch: 7, obs: 12, mean: 33.751, variance: 0.386, min: 33.294, max: 34.207, OK
+Confidence intervals for deadline: 4800 - ERWP: 31.047
+batch: 7, obs: 12, mean: 31.070, variance: 0.096, min: 30.842, max: 31.298, OK
+Confidence intervals for deadline: 3300 - ERWP: 29.764
+batch: 7, obs: 12, mean: 29.787, variance: 0.413, min: 29.315, max: 30.259, OK
+Confidence intervals for deadline: 5700 - ERWP: 32.505
+batch: 7, obs: 12, mean: 32.480, variance: 0.642, min: 31.891, max: 33.068, OK
+Confidence intervals for deadline: 1980 - ERWP: 26.995
+batch: 7, obs: 12, mean: 26.987, variance: 0.209, min: 26.651, max: 27.323, OK
+Confidence intervals for deadline: 6000 - ERWP: 32.744
+batch: 7, obs: 12, mean: 32.796, variance: 0.289, min: 32.401, max: 33.191, OK
+Confidence intervals for deadline: 2400 - ERWP: 27.844
+batch: 7, obs: 12, mean: 27.802, variance: 0.205, min: 27.470, max: 28.134, OK
+Confidence intervals for deadline: 3600 - ERWP: 30.191
+batch: 7, obs: 12, mean: 30.304, variance: 0.226, min: 29.955, max: 30.653, OK
+Confidence intervals for deadline: 5100 - ERWP: 32.106
+batch: 7, obs: 12, mean: 32.021, variance: 0.094, min: 31.795, max: 32.247, OK
+Confidence intervals for deadline: 2700 - ERWP: 28.772
+batch: 7, obs: 12, mean: 28.686, variance: 0.182, min: 28.373, max: 28.999, OK
+Confidence intervals for deadline: 3900 - ERWP: 30.827
+batch: 7, obs: 12, mean: 30.868, variance: 0.746, min: 30.233, max: 31.502, OK
+Confidence intervals for deadline: 5400 - ERWP: 32.274
+batch: 7, obs: 12, mean: 32.261, variance: 0.392, min: 31.801, max: 32.721, OK
+Confidence intervals for deadline: 1500 - ERWP: 25.504
+batch: 7, obs: 12, mean: 25.517, variance: 0.481, min: 25.008, max: 26.027, OK
+Confidence intervals for deadline: 9000 - ERWP: 34.349
+batch: 7, obs: 12, mean: 34.316, variance: 1.117, min: 33.540, max: 35.093, OK
+Confidence intervals for deadline: 3000 - ERWP: 29.609
+batch: 7, obs: 12, mean: 29.649, variance: 0.227, min: 29.299, max: 29.999, OK
+Confidence intervals for deadline: 1200 - ERWP: 24.344
+batch: 7, obs: 12, mean: 24.394, variance: 0.089, min: 24.175, max: 24.613, OK
