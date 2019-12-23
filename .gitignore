@@ -1,7 +1,9 @@
 # Prerequisites
 *.d
 results
-
+*_dbg
+WifiCelNetPassiveQueue
+./out/*
 # Compiled Object files
 *.slo
 *.lo
