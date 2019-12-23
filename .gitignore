@@ -3,7 +3,7 @@
 results
 *_dbg
 WifiCelNetPassiveQueue
-./out/*
+out
 # Compiled Object files
 *.slo
 *.lo
