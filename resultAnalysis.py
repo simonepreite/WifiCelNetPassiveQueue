@@ -8,15 +8,16 @@ import pprint
 import scipy.stats as stats
 
 
-def computeBatchMetrics(data, path, metric="MRT"):
+def computeBatchMetrics(data, path510, path712, metric="MRT"):
 	assert metric in ["MRT", "MEC", "ERWP"]
  
 	print("Computing confidence interval for {}...".format(metric))
  
 	numBatch = [5, 7]
 	numObs = [10, 12]
-	with open(path, "a+") as file:
-		print("# deadline, batch, obs, generalMean, variance, minVal, maxVal, included", file=file)
+	with open(path510, "w+", encoding="UTF-8") as file510, open(path712, "w+", encoding="UTF-8") as file712:
+		print("deadline, reneging rate, batch, obs, "+metric+", mean, variance, minVal, maxVal, included", file=file510)
+		print("deadline, reneging rate, batch, obs, "+metric+", mean, variance, minVal, maxVal, included", file=file712)
 		for deadline, seedsData in data.items():
 			values = list(seedsData.values())
 			computedValue = np.mean(values)
@@ -33,12 +34,12 @@ def computeBatchMetrics(data, path, metric="MRT"):
 					endIndex = (i+1) * obs
 					means[i] = np.mean(values[startIndex:endIndex])
    
-			generalMean = np.mean(means)
-			variance = np.var(means, ddof=1)
-			fractionCoeff = np.sqrt(variance/batch)
-			minVal, maxVal = stats.t.interval(0.90, batch-1, loc=generalMean, scale=fractionCoeff)
-			#print("batch: {}, obs: {}, mean: {:.3f}, variance: {:.3f}, min: {:.3f}, max: {:.3f}{}".format(batch, obs, generalMean, variance, minVal, maxVal, ", OK" if computedValue >= minVal and computedValue <= maxVal else ""), file=file)
-			print("{}, {}, {}, {:.3f},{:.3f}, {:.3f}, {:.3f}{}".format(int(deadline)/60, batch, obs, generalMean, variance, minVal, maxVal, ", OK" if computedValue >= minVal and computedValue <= maxVal else ""), file=file)
+				generalMean = np.mean(means)
+				variance = np.var(means, ddof=1)
+				fractionCoeff = np.sqrt(variance/batch)
+				minVal, maxVal = stats.t.interval(0.90, batch-1, loc=generalMean, scale=fractionCoeff)
+				#print("batch: {}, obs: {}, mean: {:.3f}, variance: {:.3f}, min: {:.3f}, max: {:.3f}{}".format(batch, obs, generalMean, variance, minVal, maxVal, ", OK" if computedValue >= minVal and computedValue <= maxVal else ""), file=file)
+				print("{}, {:.3f}, {}, {}, {:.3f}, {:.3f}, {:.3f}, {:.3f}, {:.3f} {}".format(int(int(deadline)/60), 1/(int(int(deadline)/60)), batch, obs, computedValue, generalMean, variance, minVal, maxVal, ", OK" if computedValue >= minVal and computedValue <= maxVal else ""), file= file510 if batch == 5 else file712)
 			
 			
 def convertVecToJson(src, dst):
@@ -162,7 +163,6 @@ def plotMeanResponseTime1(jsonRawData):
 	mrtDict = {}
 	#seed = 7
 	# non avendo distinzione tra coda wifi e coda cellulate suppongo che la coda offload sia una buona indicazione media di entrambe, quindi la considero come un'unica metrica 
-	TotalLocalActiveTime = 3500000
 	for deadline, value in jsonRawData.items():
 		mrtDict.setdefault(deadline, {})
 		meanResponseTimeacc = []
@@ -230,8 +230,8 @@ def chargePlot(matrix, path=None):
 	
 def plotMetrics(jsonRawData, plotMRT=False, plotMEC=False, plotERWP=False, path=None):
 	
-	matrixMeanResponseTimes, mecDict = plotMeanResponseTime1(jsonRawData)
-	matrixMeanEnergyConsuptions, mrtDict = plotMeanEnergyConsuption(jsonRawData)
+	matrixMeanResponseTimes, mrtDict = plotMeanResponseTime1(jsonRawData)
+	matrixMeanEnergyConsuptions, mecDict = plotMeanEnergyConsuption(jsonRawData)
 	#plotERWP(matrixMeanResponseTimes=matrixMeanResponseTimes, matrixMeanEnergyConsuptions=matrixMeanEnergyConsuptions)
 	if plotMRT:
 		chargePlot(matrixMeanResponseTimes, path+"mrtPlot.png")
@@ -259,10 +259,10 @@ def main(args):
 		if args.plotERWP:
 			ws = [0.1, 0.5, 0.9]
 			ERWPDict = genERWPDict(mrtDict=mrtDict, mecDict=mecDict, ws=ws)
-		computeBatchMetrics(mecDict, RESULTSOUT+"mecIntervals.csv", "MEC")
-		computeBatchMetrics(mrtDict, RESULTSOUT+"mrtIntervals.csv", "MRT")
+		computeBatchMetrics(mecDict, RESULTSOUT+"5-10_mecIntervals.csv", RESULTSOUT+"7-12_mecIntervals.csv","MEC")
+		computeBatchMetrics(mrtDict, RESULTSOUT+"5-10_mrtIntervals.csv", RESULTSOUT+"7-12_mrtIntervals.csv", "MRT")
 		for w, values in  ERWPDict.items():
-			computeBatchMetrics(values, RESULTSOUT+"ERWPIntervals"+str(w)+".csv", "ERWP")
+			computeBatchMetrics(values, RESULTSOUT+"5-10_ERWPIntervals"+str(w)+".csv",RESULTSOUT+"7-12_ERWPIntervals"+str(w)+".csv","ERWP")
 
 if __name__== "__main__":
 	parser = argparse.ArgumentParser(description='Process vec files.')
